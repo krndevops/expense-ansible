@@ -44,14 +44,6 @@
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
-- name: Reload systemd and start backend
-  systemd_service:
-    name: backend
-    state: restarted
-    enabled: yes
-    daemon-reload: yes
-
-
 - name: Install MySql & Python Library for MySql
   ansible.builtin.dnf:
     name: "{{item}}"
@@ -69,5 +61,11 @@
     login_password: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.rds.password', region='us-east-1') }}"
     login_host: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.rds.endpoint', region='us-east-1') }}"
 
+- name: Reload systemd and start backend
+  ansible.builtin.systemd_service:
+    name: backend
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
 
 

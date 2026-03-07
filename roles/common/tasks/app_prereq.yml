@@ -9,8 +9,15 @@
     state: directory
     owner: "{{app_user}}"
 
-- name: Downaload and extract App Content
+#- name: Downaload and extract App Content
+#  ansible.builtin.unarchive:
+#    src: https://expense-artifacts.s3.amazonaws.com/{{ component }}.zip
+#    dest: "{{ app_path }}"
+#    remote_src: yes
+
+
+- name: Downaload and extract App Content from Jfrog Artifactory
   ansible.builtin.unarchive:
-    src: https://expense-artifacts.s3.amazonaws.com/{{ component }}.zip
+    src: https://{{artifactory_user}}:{{artifactory_password}}@artifactory-int.kdevops.online:8081/artifactory/expense-{{ component }}/{{app_version}}.zip
     dest: "{{ app_path }}"
     remote_src: yes

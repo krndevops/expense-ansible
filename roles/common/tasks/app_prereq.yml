@@ -21,3 +21,7 @@
     src: https://{{artifactory_user}}:{{artifactory_password}}@artifactory-int.kdevops.online:8081/artifactory/expense-{{ component }}/{{app_version}}.zip
     dest: "{{ app_path }}"
     remote_src: yes
+  vars:
+    artifactory_user: "{{ lookup('amazon.aws.aws_ssm', 'artifactory_user', region='us-east-1' ) }}"
+    artifactory_password: "{{ lookup('amazon.aws.aws_ssm', 'artifactory_password', region='us-east-1' ) }}"
+    app_version: "{{ lookup('amazon.aws.aws_ssm', '{{env}}.expense.{{component}}.app_version', region='us-east-1' ) }}"

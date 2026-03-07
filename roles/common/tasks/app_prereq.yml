@@ -18,7 +18,7 @@
 
 - name: Downaload and extract App Content from Jfrog Artifactory
   ansible.builtin.unarchive:
-    src: https://{{artifactory_user}}:{{artifactory_password}}@artifactory-int.kdevops.online:8081/artifactory/expense-{{ component }}/{{app_version}}.zip
+    src: http://{{artifactory_user}}:{{artifactory_password}}@artifactory-int.kdevops.online:8081/artifactory/expense-{{ component }}/{{app_version}}.zip
     dest: "{{ app_path }}"
     remote_src: yes
   vars:

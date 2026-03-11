@@ -31,39 +31,6 @@ pipelines:
 #                    command: ansible-playbook
 #                    arguments: ["-i", "frontend-dev.kdevops.online,", "-e", "ansible_user=centos", "-e", "ansible_password=DevOps321", "-e", "service_name=frontend", "-e", "env=dev", "expense.yml", "-e", "app_version=${app_version}"]
 
-
-      - QA:
-          fetch_materials: true
-          clean_workspace: false
-          approval:
-            type: manual
-            allow_only_on_success: true
-          jobs:
-            deployment:
-              timeout: 0
-              tasks:
-                - exec:
-                    command: ls
-                    arguments:
-                      - -l
-                      - -A
-
-      - UAT:
-          fetch_materials: true
-          clean_workspace: false
-          approval:
-            type: manual
-            allow_only_on_success: true
-          jobs:
-            deployment:
-              timeout: 0
-              tasks:
-                - exec:
-                    command: ls
-                    arguments:
-                      - -l
-                      - -A
-
       - PROD:
           fetch_materials: true
           clean_workspace: false

@@ -11,7 +11,7 @@
 
   - name: Copying Expense configuartion file
     ansible.builtin.template:
-      src: expense.conf
+      src: nginx.conf
       dest: /etc/nginx/nginx.conf
 
   - name: App Prerequisites
